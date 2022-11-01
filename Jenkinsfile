@@ -22,6 +22,10 @@ pipeline {
             steps
             {
               //sh "mvn test"
+              mvn clean verify sonar:sonar \
+              -Dsonar.projectKey=maven-jenkins-pipelines \
+              -Dsonar.host.url=http://35.242.132.146:9000 \
+              -Dsonar.login=sqp_2b0930ac35906edec16648b09bc2e8280b094b26
               echo "Running unit tests"
             }
       }
@@ -31,7 +35,7 @@ pipeline {
         {
            withSonarQubeEnv('SonarQube')  
            {
-              sh "mvn sonar:sonar -Dsonar.projectKey=maven-jenkins-pipeline -Dsonar.host.url=ADD_THE_SONAR_URL"  
+              sh "mvn sonar:sonar -Dsonar.projectKey=maven-jenkins-pipeline -Dsonar.host.url=http://35.242.132.146:9000/"  
            }
         }
       }
